@@ -17,6 +17,12 @@ body{
 	border-radius:10px;
 }
 </style>
+<script>
+function chimg(i){
+	x = ["http://121.42.155.36/donate/5.jpg","http://121.42.155.36/donate/10.jpg","http://121.42.155.36/donate/100.jpg"]
+	document.getElementById("image").src=x[i-1]
+}
+</script>
 </head>
 <body>
 <div id="main">
@@ -31,6 +37,12 @@ body{
 <hr />
 <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">java8_161 官网下载</a><br />
 <a target="_blank" href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">java卸载工具</a><br />
+<hr />
+<p style="font-size:48px;">赞助！</p><br />
+<img id="image" width="500px"/><br />
+<button onClick="chimg(1)">赞助五块</button>
+<button onClick="chimg(2)">赞助十块</button>
+<button onClick="chimg(3)">赞助更多</button>
 </div>
 <br /><br /><br /><br />
 <p><a target="_blank" href="ball.html">看个球</a></p>
