@@ -20,7 +20,7 @@ body{
 </style>
 <script>
 function chimg(i){
-	x = ["5.jpg","10.jpg","100.jpg"]
+	x = ["100.jpg"]
 	document.getElementById("image").src="img/"+x[i-1]
 }
 </script>
@@ -34,11 +34,8 @@ function chimg(i){
 <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">java8 官网下载</a><br />
 <a target="_blank" href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">java卸载工具</a><br />
 <hr />
-<p style="font-size:48px;">赞助！</p><br />
+<p style="font-size:48px;"><a href="javascript:chimg(1)">赞助！</a></p><br />
 <img id="image" width="500px"/><br />
-<button onClick="chimg(1)">赞助五块</button>
-<button onClick="chimg(2)">赞助十块</button>
-<button onClick="chimg(3)">赞助更多</button>
 </div>
 <br /><br /><br /><br />
 <p><a target="_blank" href="ball.html">看个球</a></p>
