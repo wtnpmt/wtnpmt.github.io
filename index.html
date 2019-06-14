@@ -3,19 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-stand|ie-comp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="img/favicon.ico">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PMT's server</title>
 <style>
-body{
-	background-color:#EEEEEE;
-}
 #main{
-	width:600px;
 	padding:15px;
 	background-color:#A8D3F4;
 	margin:auto;
 	border-radius:10px;
+}
+#imageblk{
+	text-align:center;
+}
+@media screen and (max-width:600px){
+#main{
+	width:auto;
+}
+}
+@media screen and (min-width:601px){
+#main{
+	width:560px;
+}
+}
+@media screen and (max-width:960px){
+body{
+	background:#A8D3F4;
+}
+}
+@media screen and (min-width:961px){
+body{
+	background-color:#EEEEEE;
+}
 }
 </style>
 <script>
@@ -27,15 +47,19 @@ function chimg(i){
 </head>
 <body>
 <div id="main">
-<h1>可以下载的资源</h1>
+<h1>资源列表</h1>
 <div style="font-size:24px;">
-<a target="_blank" href="https://pan.baidu.com/s/1qZuEXw4">腐肉mod v0.5</a><br />
+<a target="_blank" href="https://pan.baidu.com/s/1qZuEXw4">minecraft&nbsp;腐肉mod v0.5</a><br />
 <hr />
-<a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">java8 官网下载</a><br />
-<a target="_blank" href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">java卸载工具</a><br />
+<a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Oracle java 1.8 下载(需要登陆Oracle账号)</a><br />
+<a target="_blank" href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">Oracle java卸载工具</a><br />
+<a target="_blank" href="https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=hotspot#x64_win">adopt java 1.8 - (adoptopenjdk8-hotspot-win-x64)</a><br />
+<a target="_blank" href="https://hmcl.huangyuhui.net/">HMCL启动器官网</a><br />
 <hr />
 <p style="font-size:48px;"><a href="javascript:chimg(1)">赞助！</a></p><br />
-<img id="image" width="500px"/><br />
+<div id="imageblk">
+<img id="image" width="500px"/>
+</div>
 </div>
 <br /><br /><br /><br />
 <p><a target="_blank" href="ball.html">看个球</a></p>
