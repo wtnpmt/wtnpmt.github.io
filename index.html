@@ -1,116 +1,56 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-stand|ie-comp">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="img/favicon.ico">
-<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-<title>sweet 油茶's home</title>
-<style>
-body {
-	margin: 0;
-	font-family: Helvetica, "华文新魏";
-}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-#banner {
-	padding: 0px;
-	background-color: #A8DDFF;
-	margin: 0 0 10px 0;
-	height: 50px;
-	font-size: 26px;
-	text-align: center;
-	font-weight: bold;
-	line-height: 50px;
-	font-family: "华文新魏", Helvetica;
-}
+    <link rel="icon" href="img/favicon.ico">
 
-#main {
-	padding: 15px;
-	background-color: #A8D3F4;
-	margin: auto;
-	border-radius: 10px;
-}
+    <title>油茶的sweet home</title>
 
-#image {
-	width: 80%;
-}
+    <meta name="description" content="PMT's blog.">
+    <meta name="author" content="PMT">
 
-#imageblk {
-	text-align: center;
-}
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+body{background-color:#eaedf7}
+    </style>
+  </head>
+  <body>
 
-@media screen and (max-width:600px) {
-	#main {
-		width: auto;
-	}
-}
-
-@media screen and (min-width:601px) {
-	#main {
-		width: 560px;
-	}
-}
-
-@media screen and (max-width:960px) {
-	body {
-		background: #A8D3F4;
-	}
-}
-
-@media screen and (min-width:961px) {
-	body {
-		background-color: #eaedf7;
-	}
-}
-</style>
-<script>
-	function chimg(i) {
-		x = [ "100.jpg" ]
-		document.getElementById("image").src = "img/" + x[i - 1]
-	}
-</script>
-</head>
-<body>
-	<div id="banner">sweet 油茶's home</div>
-	<div id="main">
-		<h1>资源列表</h1>
-		<div style="font-size: 20px;">
-			<a target="_blank" href="https://pan.baidu.com/s/1qZuEXw4">minecraft&nbsp;腐肉mod
-				v0.5</a><br /> <a target="_blank" href="https://hmcl.huangyuhui.net/">HMCL启动器官网</a><br />
-			<hr />
-			<a target="_blank"
-				href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Oracle
-				java 1.8 下载(需要登陆Oracle账号)</a><br />
-			<!--<a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Oracle java 11 下载(需要登陆Oracle账号)</a><br />-->
-			Oracle java 11 未提供 jre 下载方式<br /> <a target="_blank"
-				href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">Oracle
-				java卸载工具</a><br /> <a target="_blank"
-				href="https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=hotspot">adopt
-				java 1.8 - (adoptopenjdk8-hotspot-win-x64)</a><br /> <a target="_blank"
-				href="https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=openj9">java1.8-openj9
-				- (adoptopenjdk8-openj9-win-x64)</a><br /> <a target="_blank"
-				href="https://adoptopenjdk.net/releases.html?variant=openjdk11&jvmVariant=hotspot">adopt
-				java 11 - (adoptopenjdk11-hotspot-win-x64)</a><br />
-			<hr />
-			<iframe
-				style="width: 728px; height: 90px; max-width: 100%; border: none; display: block; margin: auto"
-				src="https://namemc.com/server/xhw.wtnpmt.space:25579/embed"
-				width="728" height="90"></iframe>
-			<hr />
-			<p style="font-size: 48px;">
-				<a href="javascript:chimg(1)">赞助！</a>
-			</p>
-			<br />
-			<div id="imageblk">
-				<img id="image" />
+    <div class="container-fluid" name="main">
+	<div class="row">
+		<div class="col-md-12">
+			<div style="height:200px"></div>
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-5">
+					<h1 class="text-center">
+						油茶的sweet home
+					</h1>
+                                                                                
+				</div>
+<span class="container-sm" style="width:1px;height:200px;background-color:black;">&nbsp;</span>
+				<div class="col-md-2">
+					<a href="./list.html" type="button" class="btn btn-success btn-md btn-block" role="button" style="background-color:#4b5cc4">
+						进来玩玩
+					</a> 
+					<a href="#" type="button" class="btn btn-success btn-block" role="button" style="background-color:#4b5cc4">
+						联系我
+					</a>
+				</div>
+				<div class="col-md-3">
+				</div>
 			</div>
 		</div>
-		<br /> <br /> <br /> <br />
-		<p>
-			来，<a target="_blank" href="https://nebez.github.io/floppybird/">玩个鸟</a>，
-			<a target="_blank" href="ball.html">看个球</a>。
-		</p>
 	</div>
-</body>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
