@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-stand|ie-comp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.ico">
+<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<title>油茶的sweet home</title>
+<style>
+body {
+	margin: 0;
+	font-family: Helvetica, "华文新魏";
+}
+
+#banner {
+	padding: 0px;
+	background-color: #07268b;
+	margin: 0 0 10px 0;
+	height: 50px;
+	font-size: 26px;
+	text-align: center;
+	font-weight: bold;
+	line-height: 50px;
+	font-family: "华文新魏", Helvetica;
+}
+
+#main {
+	padding: 15px;
+	background-color: #A8D3F4;
+	margin: auto;
+	border-radius: 10px;
+}
+
+#image {
+	width: 80%;
+}
+
+#imageblk {
+	text-align: center;
+}
+
+@media screen and (max-width:600px) {
+	#main {
+		width: auto;
+	}
+}
+
+@media screen and (min-width:601px) {
+	#main {
+		width: 560px;
+	}
+}
+
+@media screen and (max-width:960px) {
+	body {
+		background: #A8D3F4;
+	}
+}
+
+@media screen and (min-width:961px) {
+	body {
+		background-color: #eaedf7;
+	}
+}
+</style>
+<script>
+	function chimg(i) {
+		document.getElementById("image").src = "img/100.jpg"
+	}
+	window.onload=function(){
+		document.getElementById("mymcserver").src = "https://tietu.mcstatus.cn/banner/default/180.jpg?ts=" + new Date().getTime()
+	}
+</script>
+</head>
+<body>
+	<div id="banner">油茶的sweet home</div>
+	<div id="main">
+		<h1>资源列表</h1>
+		<div style="font-size: 20px;">
+			<a target="_blank" href="https://pan.baidu.com/s/1qZuEXw4">minecraft&nbsp;腐肉mod
+				v0.5</a><br /> <a target="_blank" href="https://hmcl.huangyuhui.net/">HMCL启动器官网</a><br />
+			<hr />
+			<a target="_blank"
+				href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Oracle
+				java 1.8 下载(需要登陆Oracle账号)</a><br />
+			<!--<a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Oracle java 11 下载(需要登陆Oracle账号)</a><br />-->
+			Oracle java 11 未提供 jre 下载方式<br /> <a target="_blank"
+				href="https://javadl-esd-secure.oracle.com/update/jut/JavaUninstallTool.exe">Oracle
+				java卸载工具</a><br /> <a target="_blank"
+				href="https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=hotspot">adopt
+				java 1.8 - (adoptopenjdk8-hotspot-win-x64)</a><br /> <a target="_blank"
+				href="https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=openj9">java1.8-openj9
+				- (adoptopenjdk8-openj9-win-x64)</a><br /> <a target="_blank"
+				href="https://adoptopenjdk.net/releases.html?variant=openjdk11&jvmVariant=hotspot">adopt
+				java 11 - (adoptopenjdk11-hotspot-win-x64)</a><br />
+			<hr />
+			<iframe
+				style="width: 728px; height: 90px; max-width: 100%; border: none; display: block; margin: auto"
+				src="https://zh-cn.namemc.com/server/mc.xhwmc.xyz/embed"
+				width="728" height="90"></iframe>
+			<!--
+			<a href="https://www.mcstatus.cn/server/180.html">
+				<img style="width: 728px; height: 90px; max-width: 100%; border: none; display: block; margin: auto" id="mymcserver" />
+			</a>
+			-->
+			<hr />
+			<p style="font-size: 48px;">
+				<a href="javascript:chimg(1)">赞助！</a>
+			</p>
+			<br />
+			<div id="imageblk">
+				<img id="image" />
+			</div>
+		</div>
+		<br /> <br /> <br /> <br />
+		<p>
+			来，<a target="_blank" href="https://nebez.github.io/floppybird/">玩个鸟</a>，
+			<a target="_blank" href="ball.html">看个球</a>。
+		</p>
+	</div>
+</body>
+</html>
