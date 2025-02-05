@@ -1,173 +1,177 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-stand|ie-comp">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="img/favicon.ico">
-<title>BALL</title>
-<style>
-body {
-    background-color: #222;
-}
-canvas {
-    display: block;
-    margin: 0 auto;
-    margin: calc(50vh - 200px) auto 0;
-    background-color: #000;
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico">
+    <title>BALL</title>
+    <style>
+        body {
+            background-color: #222;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            margin: calc(50vh - 200px) auto 0;
+            background-color: #000;
+        }
+    </style>
 </head>
+
 <body>
-<canvas id="canvas"></canvas>
-<script>
-var canvas = document.getElementById("canvas"),
-    ctx = canvas.getContext("2d"),
-    cw = canvas.width = 400;
-cx = cw / 2;
-var ch = canvas.height = 400;
-cy = ch / 2, ctx.fillStyle = "#6ab150", ctx.strokeStyle = "#fff", ctx.lineWidth = .2;
-var rad = Math.PI / 180,
-    fl = 300,
-    points = [],
-    triangles = [],
-    m = {
-        x: 100,
-        y: 100
-    };
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d"),
+            cw = canvas.width = 400;
+        cx = cw / 2;
+        var ch = canvas.height = 400;
+        cy = ch / 2, ctx.fillStyle = "#6ab150", ctx.strokeStyle = "#fff", ctx.lineWidth = .2;
+        var rad = Math.PI / 180,
+            fl = 300,
+            points = [],
+            triangles = [],
+            m = {
+                x: 100,
+                y: 100
+            };
 
-function Light(t, i, s, h) {
-    this.x = t, this.y = i, this.z = s, this.brightness = h, this.setBrightness = function (t) {
-        this.brightness = Math.min(Math.max(t, 0), 1)
-    }
-}
-
-function Point(t, i, s) {
-    this.x = t, this.y = i, this.z = s, this.fl = 250, this.vpX = 0, this.vpY = 0, this.cX = 0, this.cY = 0, this.cZ =
-        0, this.setVanishingPoint = function (t, i) {
-            this.vpX = t, this.vpY = i
-        }, this.setCenter = function (t, i, s) {
-            this.cX = t, this.cY = i, this.cZ = s
-        }, this.rotateX = function (t) {
-            var i = Math.cos(t),
-                s = Math.sin(t),
-                h = this.y * i - this.z * s,
-                n = this.z * i + this.y * s;
-            this.y = h, this.z = n
-        }, this.rotateY = function (t) {
-            var i = Math.cos(t),
-                s = Math.sin(t),
-                h = this.x * i - this.z * s,
-                n = this.z * i + this.x * s;
-            this.x = h, this.z = n
-        }, this.rotateZ = function (t) {
-            var i = Math.cos(t),
-                s = Math.sin(t),
-                h = this.x * i - this.y * s,
-                n = this.y * i + this.x * s;
-            this.x = h, this.y = n
-        }, this.getScreenX = function () {
-            var t = this.fl / (this.fl + this.z + this.cZ);
-            return this.vpX + (this.cX + this.x) * t
-        }, this.getScreenY = function () {
-            var t = this.fl / (this.fl + this.z + this.cZ);
-            return this.vpY + (this.cY + this.y) * t
-        }, this.update = function (t, i) {
-            this.rotateX(t), this.rotateY(i)
+        function Light(t, i, s, h) {
+            this.x = t, this.y = i, this.z = s, this.brightness = h, this.setBrightness = function (t) {
+                this.brightness = Math.min(Math.max(t, 0), 1)
+            }
         }
-}
 
-function Triangle(t, i, s, h) {
-    this.pointA = t, this.pointB = i, this.pointC = s, this.light = {
-        x: -100,
-        y: -100,
-        z: -100,
-        brightness: 2.5
-    }, this.getAdjustedColor = function () {
-        var t = h.r,
-            i = h.g,
-            s = h.b,
-            n = this.getLightFactor();
-        return "rgb(" + (t = t * n <= 255 ? ~~(t * n) : 255) + "," + (i = i * n <= 255 ? ~~(i * n) : 255) + "," + (
-            s = s * n <= 255 ? ~~(s * n) : 255) + ")"
-    }, this.draw = function () {
-        ctx.fillStyle = this.getAdjustedColor(), ctx.beginPath(), ctx.moveTo(this.pointA.getScreenX(), this.pointA.getScreenY()),
-            ctx.lineTo(this.pointB.getScreenX(), this.pointB.getScreenY()), ctx.lineTo(this.pointC.getScreenX(),
-                this.pointC.getScreenY()), ctx.closePath(), ctx.fill(), ctx.stroke()
-    }, this.getDepth = function () {
-        return Math.min(this.pointA.z, this.pointB.z, this.pointC.z)
-    }, this.getLightFactor = function () {
-        var t = this.pointA.x - this.pointB.x,
-            i = this.pointA.y - this.pointB.y,
-            s = this.pointA.z - this.pointB.z,
-            h = this.pointB.x - this.pointC.x,
-            n = this.pointB.y - this.pointC.y,
-            e = this.pointB.z - this.pointC.z,
-            o = i * e - s * n,
-            r = -(t * e - s * h),
-            a = t * n - i * h,
-            c = o * this.light.x + r * this.light.y + a * this.light.z,
-            p = Math.sqrt(o * o + r * r + a * a),
-            g = Math.sqrt(this.light.x * this.light.x + this.light.y * this.light.y + this.light.z * this.light.z);
-        return Math.acos(c / (p * g)) / Math.PI * this.light.brightness
-    }
-}
-
-function depth(t, i) {
-    return i.getDepth() - t.getDepth()
-}
-
-function drawSphere(t, i) {
-    for (var s = 0; s < t + 1; s++)
-        for (var h = map(s, 0, t, 0, Math.PI), n = 0; n < t + 1; n++) {
-            var e = map(n, 0, t, 0, 2 * Math.PI),
-                o = i * Math.sin(h) * Math.cos(e),
-                r = i * Math.sin(h) * Math.sin(e),
-                a = i * Math.cos(h),
-                c = s + n * (t + 1);
-            points[c] = new Point(o, r, a)
+        function Point(t, i, s) {
+            this.x = t, this.y = i, this.z = s, this.fl = 250, this.vpX = 0, this.vpY = 0, this.cX = 0, this.cY = 0, this.cZ =
+                0, this.setVanishingPoint = function (t, i) {
+                    this.vpX = t, this.vpY = i
+                }, this.setCenter = function (t, i, s) {
+                    this.cX = t, this.cY = i, this.cZ = s
+                }, this.rotateX = function (t) {
+                    var i = Math.cos(t),
+                        s = Math.sin(t),
+                        h = this.y * i - this.z * s,
+                        n = this.z * i + this.y * s;
+                    this.y = h, this.z = n
+                }, this.rotateY = function (t) {
+                    var i = Math.cos(t),
+                        s = Math.sin(t),
+                        h = this.x * i - this.z * s,
+                        n = this.z * i + this.x * s;
+                    this.x = h, this.z = n
+                }, this.rotateZ = function (t) {
+                    var i = Math.cos(t),
+                        s = Math.sin(t),
+                        h = this.x * i - this.y * s,
+                        n = this.y * i + this.x * s;
+                    this.x = h, this.y = n
+                }, this.getScreenX = function () {
+                    var t = this.fl / (this.fl + this.z + this.cZ);
+                    return this.vpX + (this.cX + this.x) * t
+                }, this.getScreenY = function () {
+                    var t = this.fl / (this.fl + this.z + this.cZ);
+                    return this.vpY + (this.cY + this.y) * t
+                }, this.update = function (t, i) {
+                    this.rotateX(t), this.rotateY(i)
+                }
         }
-    for (s = 0; s < t; s++)
-        for (n = 0; n < t; n++) {
-            var p = s + n * (t + 1),
-                g = (points[p], s + 1 + n * (t + 1)),
-                l = (points[g], s + 1 + (n + 1) * (t + 1)),
-                u = (points[l], s + (n + 1) * (t + 1)),
-                f = (points[u], {
-                    r: 255 * Math.random(),
-                    g: 255 * Math.random(),
-                    b: c % 255
-                }),
-                x = new Triangle(points[p], points[l], points[u], f);
-            triangles.push(x);
-            var v = new Triangle(points[p], points[g], points[l], f);
-            triangles.push(v)
+
+        function Triangle(t, i, s, h) {
+            this.pointA = t, this.pointB = i, this.pointC = s, this.light = {
+                x: -100,
+                y: -100,
+                z: -100,
+                brightness: 2.5
+            }, this.getAdjustedColor = function () {
+                var t = h.r,
+                    i = h.g,
+                    s = h.b,
+                    n = this.getLightFactor();
+                return "rgb(" + (t = t * n <= 255 ? ~~(t * n) : 255) + "," + (i = i * n <= 255 ? ~~(i * n) : 255) + "," + (
+                    s = s * n <= 255 ? ~~(s * n) : 255) + ")"
+            }, this.draw = function () {
+                ctx.fillStyle = this.getAdjustedColor(), ctx.beginPath(), ctx.moveTo(this.pointA.getScreenX(), this.pointA.getScreenY()),
+                    ctx.lineTo(this.pointB.getScreenX(), this.pointB.getScreenY()), ctx.lineTo(this.pointC.getScreenX(),
+                        this.pointC.getScreenY()), ctx.closePath(), ctx.fill(), ctx.stroke()
+            }, this.getDepth = function () {
+                return Math.min(this.pointA.z, this.pointB.z, this.pointC.z)
+            }, this.getLightFactor = function () {
+                var t = this.pointA.x - this.pointB.x,
+                    i = this.pointA.y - this.pointB.y,
+                    s = this.pointA.z - this.pointB.z,
+                    h = this.pointB.x - this.pointC.x,
+                    n = this.pointB.y - this.pointC.y,
+                    e = this.pointB.z - this.pointC.z,
+                    o = i * e - s * n,
+                    r = -(t * e - s * h),
+                    a = t * n - i * h,
+                    c = o * this.light.x + r * this.light.y + a * this.light.z,
+                    p = Math.sqrt(o * o + r * r + a * a),
+                    g = Math.sqrt(this.light.x * this.light.x + this.light.y * this.light.y + this.light.z * this.light.z);
+                return Math.acos(c / (p * g)) / Math.PI * this.light.brightness
+            }
         }
-}
-this.light = null, drawSphere(20, 200);
-for (var i = 0; i < points.length; i++) points[i].setVanishingPoint(cx, cy), points[i].setCenter(0, 0, 200);
 
-function Draw() {
-    requestId = window.requestAnimationFrame(Draw), ctx.clearRect(0, 0, cw, ch);
-    for (var t = 1e-4 * (m.x - cx), i = 1e-4 * (m.y - cy), s = 0; s < points.length; s++) points[s].update(i, t);
-    triangles.sort(depth);
-    for (s = 0; s < triangles.length; s++) triangles[s].draw()
-}
+        function depth(t, i) {
+            return i.getDepth() - t.getDepth()
+        }
 
-function oMousePos(t, i) {
-    var s = t.getBoundingClientRect();
-    return {
-        x: Math.round(i.clientX - s.left),
-        y: Math.round(i.clientY - s.top)
-    }
-}
+        function drawSphere(t, i) {
+            for (var s = 0; s < t + 1; s++)
+                for (var h = map(s, 0, t, 0, Math.PI), n = 0; n < t + 1; n++) {
+                    var e = map(n, 0, t, 0, 2 * Math.PI),
+                        o = i * Math.sin(h) * Math.cos(e),
+                        r = i * Math.sin(h) * Math.sin(e),
+                        a = i * Math.cos(h),
+                        c = s + n * (t + 1);
+                    points[c] = new Point(o, r, a)
+                }
+            for (s = 0; s < t; s++)
+                for (n = 0; n < t; n++) {
+                    var p = s + n * (t + 1),
+                        g = (points[p], s + 1 + n * (t + 1)),
+                        l = (points[g], s + 1 + (n + 1) * (t + 1)),
+                        u = (points[l], s + (n + 1) * (t + 1)),
+                        f = (points[u], {
+                            r: 255 * Math.random(),
+                            g: 255 * Math.random(),
+                            b: c % 255
+                        }),
+                        x = new Triangle(points[p], points[l], points[u], f);
+                    triangles.push(x);
+                    var v = new Triangle(points[p], points[g], points[l], f);
+                    triangles.push(v)
+                }
+        }
+        this.light = null, drawSphere(20, 200);
+        for (var i = 0; i < points.length; i++) points[i].setVanishingPoint(cx, cy), points[i].setCenter(0, 0, 200);
 
-function map(t, i, s, h, n) {
-    return h + t * ((n - h) / (s - i))
-}
-requestId = window.requestAnimationFrame(Draw), canvas.addEventListener("mousemove", function (t) {
-    m = oMousePos(canvas, t)
-}, !1);
-</script>
+        function Draw() {
+            requestId = window.requestAnimationFrame(Draw), ctx.clearRect(0, 0, cw, ch);
+            for (var t = 1e-4 * (m.x - cx), i = 1e-4 * (m.y - cy), s = 0; s < points.length; s++) points[s].update(i, t);
+            triangles.sort(depth);
+            for (s = 0; s < triangles.length; s++) triangles[s].draw()
+        }
+
+        function oMousePos(t, i) {
+            var s = t.getBoundingClientRect();
+            return {
+                x: Math.round(i.clientX - s.left),
+                y: Math.round(i.clientY - s.top)
+            }
+        }
+
+        function map(t, i, s, h, n) {
+            return h + t * ((n - h) / (s - i))
+        }
+        requestId = window.requestAnimationFrame(Draw), canvas.addEventListener("mousemove", function (t) {
+            m = oMousePos(canvas, t)
+        }, !1);
+    </script>
 </body>
+
 </html>
