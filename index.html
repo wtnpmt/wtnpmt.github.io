@@ -32,10 +32,11 @@
 
     #Hi {
         transform: translateX(62%) translateY(38%) rotate(25deg);
-        transition: transform 1s;
+        transition: transform 1200ms;
     }
+
     #Hi:hover {
-        
+
         transform: translateX(0px) translateY(0px) rotate(5deg);
     }
 </style>
@@ -61,7 +62,10 @@
                 </div>
             </div>
         </div>
-        <img class="fixed-bottom ms-auto" id="Hi" src="./img/emoji_u1f422.svg" alt="hi" width="80px" height="80px">
+        <div class="position-absolute bottom-0 end-0 overflow-hidden">
+            <img id="Hi" src="./img/emoji_u1f422.svg" alt="hi"
+                width="80px" height="80px">
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="about" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -70,9 +74,10 @@
                         <h1 class="modal-title fs-5" id="aboutLabel">以下方式联系我</h1>
                     </div>
                     <ul class="list-group p-3">
-                        <div class="list-group-item"><i class="bi-tencent-qq me-2"></i>2127414618
+                        <div class="list-group-item"><i class="bi-tencent-qq me-2"></i>1027414626
                         </div>
-                        <div class="list-group-item"><i class="bi bi-github me-2"></i>wtnpmt</div>
+                        <a class="list-group-item" href="https://github.com/wtnpmt"><i
+                                class="bi bi-github me-2"></i>wtnpmt</a>
                         <div class="list-group-item"><del><i class="bi bi-twitter-x me-2"></i>NULL</del></div>
                     </ul>
                     <div class="modal-footer">

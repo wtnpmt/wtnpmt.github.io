@@ -1,0 +1,14 @@
+[
+    {
+        "name": "normal",
+        "display": "日常"
+    },
+    {
+        "name": "technology",
+        "display": "技术"
+    },
+    {
+        "name": "share",
+        "display": "分享"
+    }
+]
