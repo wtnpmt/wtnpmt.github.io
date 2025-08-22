@@ -61,7 +61,7 @@
                                 return `<ul class="list-group">\n` + arrayToHTML(item.content) + `\n</ul>`;
                             } else if (item.type === "list") {
                                 return `<ul class="list-group list-group-item rounded-0 px-0 pb-0">\n` + arrayToHTML(item.content) + `\n</ul>`;
-                            } else if (item.type === "other") {
+                            } else {
                                 return item.content;
                             }
                         }).join('\n');
